@@ -6,11 +6,11 @@ import java.util.Optional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import net.minecraft.client.gui.GuiGraphics;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.base.Predicates;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 
 import ms55.manaliquidizer.client.config.Config;
 import ms55.manaliquidizer.common.fluid.ModFluids;
@@ -239,8 +239,9 @@ public class ManaLiquidizerBlockEntity extends BotaniaBlockEntity implements IFl
 			this.pool = pool;
 		}
 
+
 		@Override
-		public void renderHUD(PoseStack ms, Minecraft mc) {
+		public void renderHUD(GuiGraphics guiGraphics, Minecraft minecraft) {
 			ItemStack bucket = new ItemStack(ModFluids.MANA_FLUID_BUCKET.get());
 
 			ItemStack tablet = new ItemStack(BotaniaItems.manaTablet);
@@ -250,11 +251,10 @@ public class ManaLiquidizerBlockEntity extends BotaniaBlockEntity implements IFl
 			int color2 = 0x1644ff;
 
 			if (pool.mode == Mode.TO_MANA) {
-				BotaniaAPIClient.instance().drawSimpleManaHUD(ms, color, pool.getCurrentMana(), pool.maxMana, "Mana");
+				BotaniaAPIClient.instance().drawSimpleManaHUD(guiGraphics, color, pool.getCurrentMana(), pool.maxMana, "Mana");
 			} else {
-				BotaniaAPIClient.instance().drawSimpleManaHUD(ms, color2, pool.tank.getFluidAmount(), pool.tank.getCapacity(), "Mana Fluid");
+				BotaniaAPIClient.instance().drawSimpleManaHUD(guiGraphics, color2, pool.tank.getFluidAmount(), pool.tank.getCapacity(), "Mana Fluid");
 			}
-
 			int x = Minecraft.getInstance().getWindow().getGuiScaledWidth() / 2 - 11;
 			int y = Minecraft.getInstance().getWindow().getGuiScaledHeight() / 2 + 30;
 
@@ -265,11 +265,12 @@ public class ManaLiquidizerBlockEntity extends BotaniaBlockEntity implements IFl
 			RenderSystem.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 			RenderSystem.setShaderTexture(0, HUDHandler.manaBar);
-			RenderHelper.drawTexturedModalRect(ms, x, y, u, v, 22, 15);
+			RenderHelper.drawTexturedModalRect(guiGraphics,HUDHandler.manaBar, x, y, u, v, 22, 15);
 			RenderSystem.setShaderColor(1F, 1F, 1F, 1F);
 
-			mc.getItemRenderer().renderAndDecorateItem(tablet, x - 20, y);
-			mc.getItemRenderer().renderAndDecorateItem(bucket, x + 26, y);
+
+			// mc.getItemRenderer().renderAndDecorateItem(tablet, x - 20, y);
+			// mc.getItemRenderer().renderAndDecorateItem(bucket, x + 26, y);
 
 			RenderSystem.disableBlend();
 		}

@@ -1,6 +1,5 @@
 package ms55.manaliquidizer.common.fluid;
 
-import com.mojang.math.Vector3f;
 
 import ms55.manaliquidizer.ManaLiquidizer;
 import ms55.manaliquidizer.common.block.ModBlocks;
@@ -9,18 +8,19 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.joml.Vector3f;
+
 
 public class ModFluids {
 	public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, ManaLiquidizer.MODID);
@@ -48,8 +48,8 @@ public class ModFluids {
     	new ForgeFlowingFluid.Flowing(makeProperties()));
 
 	public static RegistryObject<LiquidBlock> MANA_FLUID_BLOCK = ModBlocks.BLOCKS.register("mana_fluid_block", () ->
-     	new LiquidBlock(MANA_FLUID_STILL, Block.Properties.of(Material.WATER, MaterialColor.WATER).noCollission().strength(100.0F).noLootTable()));
+     	new LiquidBlock(MANA_FLUID_STILL, BlockBehaviour.Properties.copy(Blocks.WATER).noCollission().strength(100.0F).noLootTable()));
 
 	public static RegistryObject<Item> MANA_FLUID_BUCKET = ITEMS.register("mana_fluid_bucket", () ->
-     	new BucketItem(MANA_FLUID_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(ManaLiquidizer.ITEM_GROUP)));
+     	new BucketItem(MANA_FLUID_STILL, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
 }

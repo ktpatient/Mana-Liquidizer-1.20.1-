@@ -23,6 +23,7 @@ public class ManaLiquidizerBlock extends BotaniaBlock implements EntityBlock {
 
 	public ManaLiquidizerBlock(Properties properties) {
 		super(properties);
+
 	}
 
 	@Override

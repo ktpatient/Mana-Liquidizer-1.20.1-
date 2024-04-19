@@ -7,7 +7,6 @@ import ms55.manaliquidizer.common.block.ModBlocks;
 import ms55.manaliquidizer.common.fluid.ModFluids;
 import ms55.manaliquidizer.common.tile.ManaLiquidizerBlockEntity;
 import ms55.manaliquidizer.common.tile.ModTiles;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -29,7 +28,7 @@ public class ManaLiquidizer {
 	public static final String MODID = "manaliquidizer";
 	public static final String NAME = "Mana Liquidizer";
 
-	public static final CreativeModeTab ITEM_GROUP = new ManaItemGroup();
+	// public static final CreativeModeTab ITEM_GROUP = new ManaItemGroup(CreativeModeTab.builder());
 
 	public ManaLiquidizer() {
 		IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -45,6 +44,8 @@ public class ManaLiquidizer {
         ModFluids.FLUID_TYPES.register(modEventBus);
         ModFluids.ITEMS.register(modEventBus);
         ModTiles.BLOCK_ENTITIES.register(modEventBus);
+
+		ManaItemGroup.TABS.register(modEventBus);
     }
 
 	private static void attachBeCapabilities(AttachCapabilitiesEvent<BlockEntity> event) {

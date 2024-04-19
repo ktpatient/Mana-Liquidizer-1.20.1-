@@ -16,7 +16,7 @@ public class DataGenerators {
 		DataGenerator gen = event.getGenerator();
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-		ManaFluidTagsProvider fluidTags = new ManaFluidTagsProvider(gen, helper);
+		ManaFluidTagsProvider fluidTags = new ManaFluidTagsProvider(gen,event.getLookupProvider(), helper);
 		gen.addProvider(event.includeServer(), fluidTags);
 	}
 }
